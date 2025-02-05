@@ -34,12 +34,18 @@ public class Task {
     public void setUpdatedAt(String updapted){this.updatedAt = updapted;}
 
     public String toString(){
-        return "Task [id=" + id + ", description=" + description + ", status=" + status + ", createdAt=" + createdAt +
-            ", updatedAt=" + updatedAt + "]";
+        return "{ "+ 
+                "\"id\" :\""+ id + 
+                "\", \"description\" : \"" + description +
+                "\", \"status\" : \"" + status+
+                "\", \"createdAt\" : \""+ createdAt + 
+                "\", \"updatedAt\" : \""+ updatedAt + "\"} ";
+
+            
     }
 
     private boolean isFileExist(){
-        File f = new File("/resources/task.json");
+        File f = new File("resources/taskList.json");
         return f.exists();
     }
 
