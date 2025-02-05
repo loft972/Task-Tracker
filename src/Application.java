@@ -1,38 +1,19 @@
 package src;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Application {
 
     public static void main(String[] args) {
-        
-        if(args[0].equals("add")){
-            Task t = new Task(args[1]);
-            System.out.println(t);
 
-            File file = new File("../resources/taskList.json");
-        
-        try{
-            if(file.createNewFile()){
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-                writer.write("{ \"TaskList\" : \t\t\n [\t\t\t\n {\"id\" :\""+ t.getId() + 
-                 "\", \"description\" : \"" + t.getDescription() +
-                 "\", \"status\" : \"" + t.getStatus()+
-                  "\", \"createdAt\" : \""+ t.getCreatedAt() + 
-                  "\", \"updatedAt\" : \""+ t.getUpdatedAt() + "\"} \t\t\n] \t\t\t\n}");
-                writer.close();
-            } else {
-                System.out.println("File aldready exists");
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        TaskService taskService = new TaskService();
+
+        switch (args[0]) {
+            case "add" -> taskService.addTask(args[1]);
+            case "update" -> taskService.updateTask(args[1]);
+            case "delete" -> taskService.deleteTask(args[1]);
+            case "mark-in-progress" -> taskService.markProgressTask(args[1]);
+            case "mark-done" -> taskService.markDoneTask(args[1]);  
+            default -> System.out.println("You have entered an unknown order");
         }
 
-        
-        
     }
 }
