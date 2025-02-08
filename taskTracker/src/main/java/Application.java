@@ -11,7 +11,13 @@ public class Application {
             case "delete" -> taskService.delete(Integer.parseInt(args[1]));
             case "mark-in-progress" -> taskService.markTask(Integer.parseInt(args[1]), Status.IN_PROGRESS);
             case "mark-done" -> taskService.markTask(Integer.parseInt(args[1]), Status.DONE);
-            case "list" -> System.out.println("list");
+            case "list" -> {
+                if(args.length > 1){
+                    taskService.listTask(args[1]);
+                } else {
+                    taskService.listTask("");
+                }
+            }
         }
     }
 }

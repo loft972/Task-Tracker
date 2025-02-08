@@ -19,7 +19,6 @@ public class TaskService {
     public void addTask(String description) throws IOException {
         if(new File(path).exists()){
             tasks = readJsonFile();
-            System.out.println(tasks.size());
             tasks.add(new Task(tasks.size(), description));
             updateId(tasks);
         } else {
@@ -53,6 +52,7 @@ public class TaskService {
         Task taskUpdate = findTask(id, tasks);
         if(taskUpdate != null){
             taskUpdate.setDescription(description);
+            taskUpdate.setUpdatedAt();
             tasks.set(tasks.indexOf(taskUpdate), taskUpdate);
             writeIntoJsonFile(path, tasks);
         }
@@ -82,6 +82,18 @@ public class TaskService {
             tasks.set(tasks.indexOf(taskToMark), taskToMark);
             writeIntoJsonFile(path, tasks);
         }
+    }
+
+    public void listTask(String action) throws IOException {
+        tasks = readJsonFile();
+        List<Task> taskList = new ArrayList<>();
+        switch (action){
+            case "" -> { taskList = tasks; }
+            case "done" -> { taskList =tasks.stream().filter(task -> task.getStatus() == Status.DONE).toList(); }
+            case "todo" -> { taskList = tasks.stream().filter(task -> task.getStatus() == Status.TODO).toList(); }
+            case "in-progress" -> { taskList = tasks.stream().filter(task -> task.getStatus() == Status.IN_PROGRESS).toList(); }
+        }
+        System.out.println(taskList);
     }
 
 }

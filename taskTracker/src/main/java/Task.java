@@ -66,8 +66,9 @@ public class Task {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.updatedAt = LocalDateTime.now().format(formatter);
     }
 
     @Override
@@ -77,6 +78,6 @@ public class Task {
                 "\", \"description\" : \"" + description +
                 "\", \"status\" : \"" + status+
                 "\", \"createdAt\" : \""+ createdAt +
-                "\", \"updatedAt\" : \""+ updatedAt + "\"} "+ System.lineSeparator();
+                "\", \"updatedAt\" : \""+ updatedAt + "\"} ";
     }
 }
