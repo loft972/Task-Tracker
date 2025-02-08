@@ -54,15 +54,17 @@ public class TaskService {
         if(taskUpdate != null){
             taskUpdate.setDescription(description);
             tasks.set(tasks.indexOf(taskUpdate), taskUpdate);
+            writeIntoJsonFile(path, tasks);
         }
-        writeIntoJsonFile(path, tasks);
     }
 
     public void delete(int id) throws IOException {
         tasks = readJsonFile();
         Task taskToDelete = findTask(id, tasks);
-        tasks.remove(tasks.indexOf(taskToDelete));
-        writeIntoJsonFile(path, tasks);
+        if(taskToDelete != null){
+            tasks.remove(taskToDelete);
+            writeIntoJsonFile(path, tasks);
+        }
     }
 
     private Task findTask(int id, List<Task>taskList){
@@ -71,4 +73,15 @@ public class TaskService {
                 .findAny()
                 .orElse(null);
     }
+
+    public void markTask(int id, Status status) throws IOException {
+        tasks = readJsonFile();
+        Task taskToMark = findTask(id, tasks);
+        if(taskToMark != null){
+            taskToMark.setStatus(status);
+            tasks.set(tasks.indexOf(taskToMark), taskToMark);
+            writeIntoJsonFile(path, tasks);
+        }
+    }
+
 }

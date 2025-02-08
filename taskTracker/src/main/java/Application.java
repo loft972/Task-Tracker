@@ -9,8 +9,8 @@ public class Application {
             case "add" -> taskService.addTask(args[1]);
             case "update" -> taskService.updateTask(Integer.parseInt(args[1]), args[2]);
             case "delete" -> taskService.delete(Integer.parseInt(args[1]));
-            case "mark-in-progress" -> System.out.println("mark-in-progress");
-            case "mark-done" -> System.out.println("mark-done");
+            case "mark-in-progress" -> taskService.markTask(Integer.parseInt(args[1]), Status.IN_PROGRESS);
+            case "mark-done" -> taskService.markTask(Integer.parseInt(args[1]), Status.DONE);
             case "list" -> System.out.println("list");
         }
     }
