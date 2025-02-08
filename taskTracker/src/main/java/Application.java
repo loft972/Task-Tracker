@@ -7,8 +7,8 @@ public class Application {
         TaskService taskService = new TaskService();
         switch (args[0]){
             case "add" -> taskService.addTask(args[1]);
-            case "update" -> System.out.println("update");
-            case "delete" -> System.out.println("delete");
+            case "update" -> taskService.updateTask(Integer.parseInt(args[1]), args[2]);
+            case "delete" -> taskService.delete(Integer.parseInt(args[1]));
             case "mark-in-progress" -> System.out.println("mark-in-progress");
             case "mark-done" -> System.out.println("mark-done");
             case "list" -> System.out.println("list");

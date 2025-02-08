@@ -77,6 +77,6 @@ public class Task {
                 "\", \"description\" : \"" + description +
                 "\", \"status\" : \"" + status+
                 "\", \"createdAt\" : \""+ createdAt +
-                "\", \"updatedAt\" : \""+ updatedAt + "\"} ";
+                "\", \"updatedAt\" : \""+ updatedAt + "\"} "+ System.lineSeparator();
     }
 }

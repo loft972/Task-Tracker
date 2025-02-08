@@ -1,10 +1,7 @@
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 
 
 import java.io.File;
@@ -17,7 +14,7 @@ public class TaskService {
     private static String path = "src/main/resources/taskList.json";
     private List<Task> tasks = new ArrayList<>();
 
-    public TaskService() {}
+    public TaskService() { /* TODO document why this constructor is empty */ }
 
     public void addTask(String description) throws IOException {
         if(new File(path).exists()){
@@ -28,8 +25,8 @@ public class TaskService {
         } else {
             tasks.add(new Task(description));
         }
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File(path),tasks);
+
+        writeIntoJsonFile(path, tasks);
     }
 
     private List<Task> readJsonFile() throws IOException {
@@ -44,5 +41,34 @@ public class TaskService {
             t.setId(i);
             i++;
         }
+    }
+
+    private void writeIntoJsonFile(String path, List<Task> taskList) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(new File(path),taskList);
+    }
+
+    public void updateTask(int id, String description) throws IOException {
+        tasks = readJsonFile();
+        Task taskUpdate = findTask(id, tasks);
+        if(taskUpdate != null){
+            taskUpdate.setDescription(description);
+            tasks.set(tasks.indexOf(taskUpdate), taskUpdate);
+        }
+        writeIntoJsonFile(path, tasks);
+    }
+
+    public void delete(int id) throws IOException {
+        tasks = readJsonFile();
+        Task taskToDelete = findTask(id, tasks);
+        tasks.remove(tasks.indexOf(taskToDelete));
+        writeIntoJsonFile(path, tasks);
+    }
+
+    private Task findTask(int id, List<Task>taskList){
+        return taskList.stream()
+                .filter(task -> task.getId() == id)
+                .findAny()
+                .orElse(null);
     }
 }
