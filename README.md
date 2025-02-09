@@ -12,25 +12,26 @@ Utilisation de la dépendance suivante, pour utiliser les fichiers aux formats J
 </dependency>
 
 #Lancer le projet
+Ouvrez le dossier taskTracker dans votre IDE.
 Après le build, il faut ajouter les arguments suivant pour effectuer les différentes actions : 
 	
-	# Ajouter une task
-	add "Buy groceries"
-	
-	# sortie: Task added successfully (ID: 1)
+# Ajouter une task
+add "Buy groceries"
 
-	# Mise à jour et suppression d'une task
-	update 1 "Buy groceries and cook dinner"
-	delete 1
+# sortie: Task added successfully (ID: 1)
 
-	# Mettre une task au status in-progress ou done
-	mark-in-progress 1
-	mark-done 1
+# Mise à jour et suppression d'une task
+update 1 "Buy groceries and cook dinner"
+delete 1
 
-	# Lister toutes les tasks
-	list
+# Mettre une task au status in-progress ou done
+mark-in-progress 1
+mark-done 1
 
-	# Lister les tasks par status
-	list done
-	list todo
-	list in-progress
+# Lister toutes les tasks
+list
+
+# Lister les tasks par status
+list done
+list todo
+list in-progress
