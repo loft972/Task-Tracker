@@ -18,7 +18,7 @@ Après le build, il faut ajouter les arguments suivant pour effectuer les diffé
 # Ajouter une task
 add "Buy groceries"
 
-# sortie: Task added successfully (ID: 1)
+## sortie: Task added successfully (ID: 1)
 
 # Mise à jour et suppression d'une task
 update 1 "Buy groceries and cook dinner"
