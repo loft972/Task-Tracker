@@ -26,6 +26,7 @@ public class TaskService {
         }
 
         writeIntoJsonFile(path, tasks);
+        System.out.println("Task added successfully (ID: " + tasks.size()+ ")");
     }
 
     private List<Task> readJsonFile() throws IOException {
