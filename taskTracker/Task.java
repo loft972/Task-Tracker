@@ -1,4 +1,3 @@
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,10 +9,10 @@ public class Task {
     private String createdAt;
     private String updatedAt;
 
-    public Task(){};
+    public Task() {}
 
-    public Task(int id, String description){
-        this.id = id;
+    public Task(String description) {
+        this.id = 1;
         this.description = description;
         this.status = Status.TODO;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -21,13 +20,12 @@ public class Task {
         this.updatedAt = null;
     }
 
-    public Task(String description){
-        this.id = 1;
+    public Task(int id, String description, Status status, String createdAt, String updatedAt) {
+        this.id = id;
         this.description = description;
-        this.status = Status.TODO;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.createdAt = LocalDateTime.now().format(formatter);
-        this.updatedAt = null;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public int getId() {
@@ -58,10 +56,6 @@ public class Task {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getUpdatedAt() {
         return updatedAt;
     }
@@ -72,12 +66,13 @@ public class Task {
     }
 
     @Override
-    public String toString(){
-        return "{ "+
-                "\"id\" :\""+ id +
-                "\", \"description\" : \"" + description +
-                "\", \"status\" : \"" + status+
-                "\", \"createdAt\" : \""+ createdAt +
-                "\", \"updatedAt\" : \""+ updatedAt + "\"} ";
+    public String toString() {
+        return "{" +
+                "\"id\": \""+  id +"\"," +
+                "\"description\": \""+  description +"\"," +
+                "\"status\": \""+ status +"\"," +
+                "\"createdAt\": \""+  createdAt +"\"," +
+                "\"updatedAt\": \""+  updatedAt +"\"" +
+                "}";
     }
 }
