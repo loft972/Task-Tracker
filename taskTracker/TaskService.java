@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TaskService {
 
@@ -50,6 +51,15 @@ public class TaskService {
     }
 
     public void listTask(String arg) {
+        tasks = readJsonFile();
+        List<Task> taskList;
+        switch (arg){
+            case "done" ->  taskList =tasks.stream().filter(task -> task.getStatus().equals(Status.DONE)).toList();
+            case "todo" -> taskList = tasks.stream().filter(task -> task.getStatus() == Status.TODO).toList();
+            case "in-progress" -> taskList = tasks.stream().filter(task -> task.getStatus() == Status.IN_PROGRESS).toList();
+            default -> taskList = tasks;
+        }
+        System.out.println(formatJson(taskList));
     }
 
     private void createJsonFile(String jsonTask){
@@ -161,6 +171,12 @@ public class TaskService {
 
         json.append("]");
         return json.toString();
+    }
+
+    private void findTasks(String status){
+        tasks = readJsonFile();
+        List<Task>result = tasks.stream().filter(task -> task.getStatus().toString().equals(status)).collect(Collectors.toList());
+        System.out.println(formatJson(result));
     }
 
 }
