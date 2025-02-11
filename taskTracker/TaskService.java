@@ -17,12 +17,14 @@ public class TaskService {
         if(Files.exists(Path.of(path))){
             tasks = readJsonFile();
             tasks.add(new Task(description));
+            tasks.get(tasks.size()-1).setId(tasks.size());
             createJsonFile(formatJson(tasks));
         } else {
             Files.createFile(Path.of(path));
             tasks.add(new Task(description));
             createJsonFile(formatJson(tasks));
         }
+        System.out.println("Task added successfully (ID: "+ tasks.size() + ")");
     }
 
     public void updateTask(int i, String arg) {
@@ -70,8 +72,6 @@ public class TaskService {
 
         // Diviser chaque objet JSON (en supposant qu'ils sont séparés par "},{")
         String[] jsonObjects = jsonString.split("},\\s*\\{");
-
-        System.out.println(jsonObjects.length);
 
         for(String jsonObject : jsonObjects){
             // Remettre les accolades manquantes
