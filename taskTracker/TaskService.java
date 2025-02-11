@@ -27,7 +27,12 @@ public class TaskService {
         System.out.println("Task added successfully (ID: "+ tasks.size() + ")");
     }
 
-    public void updateTask(int i, String arg) {
+    public void updateTask(int id, String description) {
+        if(Files.exists(Path.of(path))){
+            tasks = readJsonFile();
+            tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.setDescription(description));
+            createJsonFile(formatJson(tasks));
+        }
     }
 
     public void delete(int i) {
