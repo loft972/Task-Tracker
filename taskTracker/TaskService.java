@@ -36,14 +36,17 @@ public class TaskService {
         if(Files.exists(Path.of(path))){
             tasks = readJsonFile();
             Task toRemove = tasks.stream().filter(task -> task.getId() == id).findAny().orElse(null);
-            System.out.println(toRemove);
             tasks.remove(toRemove.getId()-1);
-            System.out.println(tasks);
             createJsonFile(formatJson(tasks));
         }
     }
 
-    public void markTask(int i, Status status) {
+    public void markTask(int id, Status status) {
+        if(Files.exists(Path.of(path))){
+            tasks = readJsonFile();
+            tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.setStatus(status));
+            createJsonFile(formatJson(tasks));
+        }
     }
 
     public void listTask(String arg) {
