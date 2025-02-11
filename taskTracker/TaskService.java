@@ -69,7 +69,9 @@ public class TaskService {
         jsonString = jsonString.substring(1, jsonString.length() - 1).trim();
 
         // Diviser chaque objet JSON (en supposant qu'ils sont séparés par "},{")
-        String[] jsonObjects = jsonString.split("\\},\\{");
+        String[] jsonObjects = jsonString.split("},\\s*\\{");
+
+        System.out.println(jsonObjects.length);
 
         for(String jsonObject : jsonObjects){
             // Remettre les accolades manquantes
