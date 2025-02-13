@@ -10,22 +10,28 @@ javac -d out *.java
 
 #RUN
 
-### Adding a new task
+### <ins>Adding a new task</ins>
+```
 java -cp out TaskAppli.java add "Buy groceries"
-### Output: Task added successfully (ID: 1)
-
-### Updating and deleting tasks
+```
+### <ins>Updating and deleting tasks</ins>
+```
 java -cp out TaskAppli.java update 1 "Buy groceries and cook dinner"
 java -cp out TaskAppli.java delete 1
-
-### Marking a task as in progress or done
+```
+### <ins>Marking a task as in progress or done</ins>
+```
 java -cp out TaskAppli.java mark-in-progress 1
 java -cp out TaskAppli.java mark-done 1
-
-### Listing all tasks
+```
+### <ins>Listing all tasks</ins>
+```
 java -cp out TaskAppli.java list
+```
 
-### Listing tasks by status
+### <ins>Listing tasks by status</ins>
+```
 java -cp out TaskAppli.java list done
 java -cp out TaskAppli.java list todo
 java -cp out TaskAppli.java list in-progress
+```
