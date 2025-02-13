@@ -2,13 +2,14 @@
 project from roadmap
 https://roadmap.sh/projects/task-tracker
 
-#information
-Java 21
+## Information
+This project has been coded in Java 21
 
-#BUILD 
+## BUILD 
+```
 javac -d out *.java 
-
-#RUN
+```
+## RUN
 
 ### <ins>Adding a new task</ins>
 ```
