@@ -28,25 +28,33 @@ public class TaskService {
     public void updateTask(int id, String description) {
         if(Files.exists(Path.of(path))){
             tasks = readJsonFile();
-            tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.setDescription(description));
-            createJsonFile(formatJson(tasks));
+            if(indexValid(id)){
+                tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.setDescription(description));
+                createJsonFile(formatJson(tasks));
+            }
+
         }
     }
 
     public void delete(int id) {
         if(Files.exists(Path.of(path))){
             tasks = readJsonFile();
-            Task toRemove = tasks.stream().filter(task -> task.getId() == id).findAny().orElse(null);
-            tasks.remove(toRemove.getId()-1);
-            createJsonFile(formatJson(tasks));
+            if(indexValid(id)){
+                Task toRemove = tasks.stream().filter(task -> task.getId() == id).findAny().orElse(null);
+                tasks.remove(toRemove.getId()-1);
+                createJsonFile(formatJson(tasks));
+            }
+
         }
     }
 
     public void markTask(int id, Status status) {
         if(Files.exists(Path.of(path))){
-            tasks = readJsonFile();
-            tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.setStatus(status));
-            createJsonFile(formatJson(tasks));
+            if(indexValid(id)){
+                tasks = readJsonFile();
+                tasks.stream().filter(task -> task.getId() == id).forEach(task -> task.setStatus(status));
+                createJsonFile(formatJson(tasks));
+            }
         }
     }
 
@@ -173,10 +181,13 @@ public class TaskService {
         return json.toString();
     }
 
-    private void findTasks(String status){
-        tasks = readJsonFile();
-        List<Task>result = tasks.stream().filter(task -> task.getStatus().toString().equals(status)).collect(Collectors.toList());
-        System.out.println(formatJson(result));
+    private boolean indexValid(int id){
+        if(id < tasks.size()){
+            return true;
+        } else {
+            System.out.println("There not task with this ID : "+ id);
+            return false;
+        }
     }
 
 }

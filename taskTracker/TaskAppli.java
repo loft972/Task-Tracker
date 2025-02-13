@@ -18,7 +18,9 @@ public class TaskAppli {
                     taskService.listTask("");
                 }
             }
-            default -> System.out.println("Error");
+            default -> System.out.println("""
+                    Error : You have select an action not possible.
+                    """);
         }
     }
 }
