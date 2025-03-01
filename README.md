@@ -2,8 +2,6 @@
 project from roadmap
 https://roadmap.sh/projects/task-tracker
 
-## Information
-This project has been coded in Java 21
 
 ## BUILD 
 ```
